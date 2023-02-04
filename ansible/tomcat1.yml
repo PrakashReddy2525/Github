@@ -66,3 +66,9 @@
         dest: "{{ user_home }}/latest/conf/tomcat-users.xml"
         owner: "{{ user_name }}"
         group: "{{ group_name }}"
+    - name: copy the manager app context file
+      ansible.builtin.copy:
+        src: context.xml
+        dest: "{{ user_home }}/latest/webapps/manager/META-INF/context.xml"
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"    
