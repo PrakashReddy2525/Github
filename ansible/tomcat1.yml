@@ -39,6 +39,21 @@
         src: "{{ user_home }}/apache-tomcat-{{ tomcat_version }}"
         dest: "{{ user_home }}/latest"
         state: link
+    - name: change permissions
+      ansible.builtin.file:
+        dest: "{{ user_home }}"
+        recurse: true
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"
+        state: directory
+    - name: add execute permissions to shell files
+      ansible.builtin.command: "sudo sh -c 'chmod +x {{ user_home }}/latest/bin/*.sh'"
+    - name: Create a systemd unit file
+      ansible.builtin.copy:
+        src: tomcat.service
+        dest: /etc/systemd/system/tomcat.service
+        owner: "{{ user_name }}"
+        group: "{{ group_name }}"  
 
 
         
