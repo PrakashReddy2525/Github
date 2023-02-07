@@ -75,7 +75,7 @@
         remote_src: yes
     - name: copy the host manager app context file
       ansible.builtin.copy:
-        src: hostmanager.xml
+        src: hostmanager-context.xml
         dest: "{{ user_home }}/latest/webapps/host-manager/META-INF/context.xml"
         owner: "{{ user_name }}"
         group: "{{ group_name }}"
