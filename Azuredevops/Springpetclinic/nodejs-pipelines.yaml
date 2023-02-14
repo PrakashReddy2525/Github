@@ -1,0 +1,16 @@
+---
+pool:
+  name: 'Azure pipelines'
+  vmImage: 'ubuntu-latest'
+
+trigger:
+- main
+
+steps:
+- task: Npm@1
+  inputs:
+    command: 'install'
+- task: Npm@1
+  inputs:
+    command: 'custom'
+    customCommand: 'run build'
