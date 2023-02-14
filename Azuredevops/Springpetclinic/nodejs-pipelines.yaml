@@ -12,5 +12,7 @@ steps:
     command: 'install'
 - task: Npm@1
   inputs:
+    versionSpec: '16.x'
+  displayName: 'Install Node.js'
     command: 'custom'
     customCommand: 'run build'
