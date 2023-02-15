@@ -1,10 +1,10 @@
 ---
-- name: install java11 on ubuntu
+- name: install java17 on ubuntu
   hosts: all
   become: yes
   tasks:
-    - name: openjdk-11-jdk
+    - name: openjdk-17-jdk
       ansible.builtin.apt:
-        name: openjdk-11-jdk
+        name: openjdk-17-jdk
         update_cache: yes
         state: present
