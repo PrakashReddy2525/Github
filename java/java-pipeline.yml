@@ -1,0 +1,11 @@
+---
+pool:
+  name: 'Default'
+  vmImage: 'ubuntu-latest'
+
+trigger:
+- main
+
+steps:
+- script: 'ansible-playbook -i hosts /home/devops/new java.yml'
+  displayName: 'install java'
