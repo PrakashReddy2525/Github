@@ -5,7 +5,7 @@
   tasks:
     - name: installing java
       ansible.builtin.apt:
-        name: open-jdk-17
+        name: openjdk-17
         update_cache: yes
         state: present
     - name: downloading spring petclinic
@@ -13,4 +13,4 @@
         url: https://referenceapplicationskhaja.s3.us-west-2.amazonaws.com/spring-petclinic-2.4.2.jar
         dest: /home/ubuntu
     - name: running spring petclinic
-      command: "java -jar spring-petclinic-2.4.2.jar"
+      command: "java -jar /home/ubuntu/spring-petclinic-2.4.2.jar"

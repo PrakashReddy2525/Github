@@ -1,0 +1,72 @@
+---
+pool:
+  name: 'Default'
+  vmImage: 'ubuntu-latest'
+
+trigger:
+- main
+
+steps:
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+- script: |
+   sudo apt update
+- script: |
+   sudo apt install openjdk-17-jdk
+  displayName: 'install java'
+- script: java --version
+   displayName: check java version
+- script: |
+   sudo apt install maven
+  displayName: 'install maven'
+- script: mvn --version
+   displayName: check maven version
+---
+
+---
+pool:
+  name: 'Default'
+
+trigger:
+- main
+
+jobs:
+- jobs: mavenjob
+  displayName: maven building
+  steps:
+  - task: Maven@3
+    displayName: building spc
+    inputs:
+      mavenPomFile: 'pom.xml'
+      publishJUnitResults: false
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      jdkVersionOption: '1.17'
+      goals: package
+
+
+
+
+
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'package'
+      publishJUnitResults: true
+      testResultsFiles: '**/surefire-reports/TEST-*.xml'
+      jdkVersionOption: '1.17'
+
+---
+pool: 'Azure Pipelines'
+
+trigger:
+  - main
+
+steps:
+  - task: Maven@3
+    inputs:
+      mavenPomFile: 'pom.xml'
+      goals: 'package'
+      jdkVersionOption: '1.17'
